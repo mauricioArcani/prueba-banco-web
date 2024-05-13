@@ -1,0 +1,62 @@
+<h2 class="mb-5">
+    Nueva transacción
+</h2>
+<div class="card" style="width: 100%">
+    <div class="card-header text-center fw-bold">
+      Datos cliente
+    </div>
+    <ul class="list-group list-group-flush display-6">
+      <li class="list-group-item"><b class="fw-bold">Número de cuenta:</b> {{ accountData?.numberAccount }} </li>
+      <li class="list-group-item"><b class="fw-bold">Monto total:</b> {{ accountData?.amount }}</li>
+      <li class="list-group-item"><b class="fw-bold">Moneda:</b> {{ accountData?.currency }}</li>
+    </ul>
+</div>
+<div class="row row-cols-3 justify-content-center mt-5" >
+        <form [formGroup]="form" (ngSubmit)="create()">
+            <div class="mb-3">
+                <h3>Introduzca la operación a realizar: </h3>
+                <label for="amount">Monto</label>
+                <input id="amount" type="text" placeholder="Monto" class="form-control"
+                    formControlName="amount">
+
+                    @if (form.get('amount')?.hasError('required') && form.get('amount')?.touched) {
+                        <p class="invalid-feedback d-block">El monto es obligatorio</p>    
+                    }
+            </div>
+        
+            <div class="mb-3">
+                <label for="current">Tipo de moneda</label>
+                <select id="current" class="form-select" aria-label="Tipo Moneda" formControlName="current">
+                    <option value="BOLIVIANOS">Bolivianos</option>
+                    <option value="DOLARES">Dolares</option>
+                </select>
+
+                @if (form.get('current')?.hasError('required') && form.get('current')?.touched) {
+                    <p class="invalid-feedback d-block">El tipo de moneda es obligatorio</p>    
+                }
+            </div>
+            
+
+            <div class="mb-3">
+                <label for="transactionType">Tipo de Transacción</label>
+                <select id="transactionType" class="form-select" aria-label="Tipo Transacción" formControlName="transactionType">
+                    <option value="DEPOSITO">Deposito</option>
+                    <option value="RETIRO">Retiro</option>
+                </select>
+
+                @if (form.get('transactionType')?.hasError('required') && form.get('transactionType')?.touched) {
+                    <p class="invalid-feedback d-block">El tipo de transacción es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="text-end">
+                <button class="btn btn-light" [routerLink]="['/', accountData?.idAccount, 'transactions']">
+                    Cancelar
+                </button>
+
+                <button class="btn btn-primary ms-2">
+                    Realizar transacción
+                </button>
+            </div>
+        </form>
+</div>

@@ -1,0 +1,98 @@
+<h2 class="mb-5">
+    @if (client) {
+        Editar 
+    } @else {
+        Nuevo 
+    }
+    Cliente
+</h2>
+
+<div class="row row-cols-3 justify-content-center" >
+    @if (form) {
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="mb-3">
+                <label for="name">Nombres</label>
+                <input id="name" type="text" placeholder="Nombres" class="form-control"
+                    formControlName="name">
+
+                @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+                    <p class="invalid-feedback d-block">El nombre es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="mb-3">
+                <label for="firstLastName">Primer Apellido</label>
+                <input id="firstLastName" type="text" placeholder="Primer Apellido" class="form-control"
+                formControlName="firstLastName">
+
+                @if (form.get('firstLastName')?.hasError('required') && form.get('firstLastName')?.touched) {
+                    <p class="invalid-feedback d-block">El primer apellido es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="mb-3">
+                <label for="secondLastName">Segundo Apellido</label>
+                <input id="secondLastName" type="text" placeholder="Segundo Apellido" class="form-control"
+                formControlName="secondLastName">
+            </div>
+        
+            <div class="mb-3">
+                <label for="documentType">Tipo de Documento</label>
+                <select id="documentType" class="form-select" aria-label="Tipo Documento" formControlName="documentType">
+                    <option value="CARNET DE IDENTIDAD">Carnet de Identidad</option>
+                    <option value="CARNET EXTRANJERO">Carnet extranjero</option>
+                </select>
+
+                @if (form.get('documentType')?.hasError('required') && form.get('documentType')?.touched) {
+                    <p class="invalid-feedback d-block">El tipo de documento es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="mb-3">
+                <label for="identityDocument">Número de Documento</label>
+                <input id="identityDocument" type="text" placeholder="Número de Documento" class="form-control"
+                formControlName="identityDocument">
+
+                @if (form.get('identityDocument')?.hasError('required') && form.get('identityDocument')?.touched) {
+                    <p class="invalid-feedback d-block">El número de documento es obligatorio</p>    
+                }
+            </div>
+            <div class="mb-3">
+                <label for="birthdate">Fecha de Nacimiento</label>
+                <input id="birthdate" type="date" placeholder="Fecha de Nacimiento" class="form-control"
+                formControlName="birthdate">
+
+                @if (form.get('birthdate')?.hasError('required') && form.get('birthdate')?.touched) {
+                    <p class="invalid-feedback d-block">La fecha de nacimiento es obligatorio</p>    
+                }
+            </div>
+            <div class="mb-3">
+                <label for="genre">Género</label>
+                <select id="genre" class="form-select" aria-label="Género" formControlName="genre">
+                    <option value="FEMENINO">Femenino</option>
+                    <option value="MASCULINO">Masculino</option>
+                </select>
+
+                @if (form.get('genre')?.hasError('required') && form.get('genre')?.touched) {
+                    <p class="invalid-feedback d-block">El género es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="text-end">
+                <button class="btn btn-light" routerLink="/">
+                    Cancelar
+                </button>
+        
+                <button class="btn btn-primary ms-2">
+                    @if (client) {
+                        Actualizar
+                    }@else {
+                        Registrar 
+                    }
+                    cliente
+                </button>
+            </div>
+        
+        </form>
+    }
+</div>

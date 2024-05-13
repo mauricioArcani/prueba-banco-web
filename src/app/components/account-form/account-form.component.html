@@ -1,0 +1,87 @@
+<h2 class="mb-5">
+    @if (account) {
+        Editar 
+    } @else {
+        Nueva 
+    }
+    Cuenta
+</h2>
+
+<div class="row row-cols-3 justify-content-center" >
+    @if (form) {
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="mb-3">
+                <label for="productType">Tipo producto</label>
+                <select id="productType" class="form-select" aria-label="Tipo producto" formControlName="productType">
+                    <option value="CAJA DE AHORRO">Caja de Ahorro</option>
+                    <option value="CUENTA CORRIENTE">Cuenta corriente</option>
+                </select>
+
+                @if (form.get('productType')?.hasError('required') && form.get('productType')?.touched) {
+                    <p class="invalid-feedback d-block">El tipo de producto  es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="mb-3">
+                <label for="numberAccount">Número de cuenta</label>
+                <input id="numberAccount" type="text" placeholder="Número de cuenta" class="form-control"
+                formControlName="numberAccount">
+
+                @if (form.get('numberAccount')?.hasError('required') && form.get('numberAccount')?.touched) {
+                    <p class="invalid-feedback d-block">El número de cuenta es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="mb-3">
+                <label for="currency">Moneda</label>
+                <select id="currency" class="form-select" aria-label="Tipo producto" formControlName="currency">
+                    <option value="BOLIVIANOS">Bolivianos</option>
+                    <option value="DOLARES">Dolares</option>
+                </select>
+
+                @if (form.get('currency')?.hasError('required') && form.get('currency')?.touched) {
+                    <p class="invalid-feedback d-block">La moneda es obligatoria (BS, US)</p>    
+                }
+
+            </div>
+        
+            <div class="mb-3">
+                <label for="amount">Monto</label>
+                <input id="amount" type="text" placeholder="Monto" class="form-control"
+                formControlName="amount">
+
+                @if (form.get('amount')?.hasError('required') && form.get('amount')?.touched) {
+                    <p class="invalid-feedback d-block">El monto es obligatorio</p>    
+                }
+            </div>
+        
+            <div class="mb-3">
+                <label for="office">Sucursal</label>
+                <select id="office" class="form-select" aria-label="Sucursal" formControlName="office">
+                    <option value="LA PAZ">La Paz</option>
+                    <option value="COCHABAMBA">Cochabamba</option>
+                    <option value="SANTA CRUZ">Santa Cruz</option>
+                </select>
+
+                @if (form.get('office')?.hasError('required') && form.get('office')?.touched) {
+                    <p class="invalid-feedback d-block">La sucursal es obligatoria</p>    
+                }
+            </div>
+            <div class="text-end">
+                <button class="btn btn-light" [routerLink]="['/', idClient, 'accounts']">
+                    Cancelar
+                </button>
+        
+                <button class="btn btn-primary ms-2">
+                    @if (account) {
+                        Actualizar
+                    }@else {
+                        Registrar 
+                    }
+                    cuenta
+                </button>
+            </div>
+        
+        </form>
+    }
+</div>

@@ -1,0 +1,50 @@
+<h2 class="mb-5">Clientes</h2>
+
+<div class="text-center mb-3">
+    <button class="btn btn-primary btn-lg" routerLink="/new">
+       Registrar nuevo cliente
+    </button>
+</div>
+<table class="table table-responsive table-striped text-wrap text-center">
+    <caption>Lista de clientes</caption>
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>PRIMER APELLIDO</th>
+            <th>SEGUNDO APELLIDO</th>
+            <th>TIPO DOCUMENTO</th>
+            <th>DOCUMENTO</th>
+            <th>FECHA DE NACIMIENTO</th>
+            <th>GÉNERO</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(client of clients; track client.idClient){
+            <tr>
+                <td>{{ client.idClient}}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.firstLastName }}</td>
+                <td>{{ client.secondLastName }}</td>
+                <td>{{ client.documentType }}</td>
+                <td>{{ client.identityDocument }}</td>
+                <td>{{ client.birthdate | date : 'dd/MM/yyyy' }}</td>
+                <td>{{ client.genre }}</td>
+                <td class="text-end">
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm" [routerLink]="[client.idClient, 'edit']">
+                            Editar Datos
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteClient(client)">
+                            Eliminar Cliente
+                        </button>
+                        <button class="btn btn-success btn-sm" [routerLink]="[client.idClient, 'accounts']">
+                            Ver Cuentas
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

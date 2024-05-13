@@ -1,0 +1,42 @@
+<h2 class="mb-5">Transacciones</h2>
+
+<div class="card" style="width: 100%">
+    <div class="card-header text-center fw-bold">
+      Datos cliente
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b class="fw-bold">Número de cuenta:</b> {{ accountData?.numberAccount }}</li>
+      <li class="list-group-item text-center">
+        <button class="btn btn-success btn-lg" [routerLink]="['/', accountData?.idAccount,'newTransaction']">
+            Realizar una transacción
+         </button>
+      </li>
+    </ul>
+</div>
+
+<table class="table table-responsive table-striped text-wrap text-center">
+    <caption>Lista de transacciones</caption>
+    <thead class="table-dark">
+        <tr>
+            <th>id</th>
+            <th>fecha</th>
+            <th>hora</th>
+            <th>Tipo Transacción</th>
+            <th>Monto</th>
+            <th>Moneda</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(transaction of transactions; track transaction.idTransaction){
+            <tr>
+                <td>{{ transaction.idTransaction }}</td>
+                <td>{{ transaction.dateRegistry }}</td>
+                <td>{{ transaction.time }}</td>
+                <td>{{ transaction.transactionType }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.current }}</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

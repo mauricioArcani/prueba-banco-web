@@ -1,0 +1,58 @@
+<h2 class="mb-5">Cuentas</h2>
+
+<div class="card" style="width: 100%">
+    <div class="card-header text-center fw-bold">
+      Datos cliente
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b class="fw-bold">Nombre completo:</b> {{ clientData?.name }} {{clientData?.firstLastName}} {{clientData?.secondLastName}}</li>
+      <li class="list-group-item"><b class="fw-bold">Número de documento:</b> {{ clientData?.identityDocument }}</li>
+      <li class="list-group-item"><b class="fw-bold">Fecha de nacimiento:</b> {{ clientData?.birthdate  | date : 'dd/MM/yyyy' }}</li>
+      <li class="list-group-item text-center">
+        <button class="btn btn-success btn-lg" [routerLink]="['/', clientData?.idClient, 'newAccount']">
+            Aperturar nueva cuenta
+         </button>
+      </li>
+    </ul>
+</div>
+<table class="table table-responsive table-striped text-wrap text-center">
+    <caption>Lista de cuentas de {{ clientData?.name }} {{clientData?.firstLastName}} {{clientData?.secondLastName}}</caption>
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Tipo producto</th>
+            <th>Número de cuenta</th>
+            <th>Moneda</th>
+            <th>Monto</th>
+            <th>Fecha de creación</th>
+            <th>Sucursal</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(account of accounts; track account.idAccount){
+            <tr>
+                <td>{{ account.idAccount}}</td>
+                <td>{{ account.productType }}</td>
+                <td>{{ account.numberAccount }}</td>
+                <td>{{ account.currency }}</td>
+                <td>{{ account.amount }}</td>
+                <td>{{ account.dateRegistry | date : 'dd/MM/yyy' }}</td>
+                <td>{{ account.office }}</td>
+                <td class="text-end">
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm" [routerLink]="['/', account.idAccount, 'editAccount']">
+                            Editar Datos
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteAccount(account)">
+                            Eliminar Cuenta
+                        </button>
+                        <button class="btn btn-success btn-sm" [routerLink]="['/',account.idAccount, 'transactions']">
+                            Ver Transacciones
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
